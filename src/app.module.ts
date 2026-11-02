@@ -16,7 +16,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serviceId: 'forum-api',
     }),
     AuthModule,
-    UserModule,
+    UserModule
   ],
 })
 export class AppModule {}
