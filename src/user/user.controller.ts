@@ -55,7 +55,7 @@ export class UserController {
     return user;
   }
 
-  @Post('signup')
+  @Post()
   async create(
     @Body() userData: { name?: string; email: string; password: string },
   ): Promise<PublicUser> {
