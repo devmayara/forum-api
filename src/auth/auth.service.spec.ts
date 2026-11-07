@@ -40,7 +40,6 @@ describe('AuthService', () => {
 
     expect(jwtService.signAsync).toHaveBeenCalledWith({
       sub: '1',
-      email: 'user@example.com',
     });
     expect(result).toEqual({ access_token: 'signed.jwt.token' });
   });

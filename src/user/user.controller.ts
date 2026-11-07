@@ -10,18 +10,12 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { Public } from '../auth/public.decorator.js';
 import { User } from '../generated/prisma/client.js';
+import { PUBLIC_USER_SELECT } from './user.constants.js';
 import { UserService } from './user.service.js';
 
 type PublicUser = Omit<User, 'password'>;
-
-const PUBLIC_USER_SELECT = {
-  id: true,
-  email: true,
-  name: true,
-  createdAt: true,
-  updatedAt: true,
-} as const;
 
 @Controller('users')
 export class UserController {
@@ -55,6 +49,7 @@ export class UserController {
     return user;
   }
 
+  @Public()
   @Post()
   async create(
     @Body() userData: { name?: string; email: string; password: string },

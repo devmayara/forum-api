@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module.js';
+import { JwtAuthGuard } from './auth.guard.js';
 import { AuthController } from './auth.controller.js';
 import { AuthService } from './auth.service.js';
 
@@ -24,6 +26,11 @@ import { AuthService } from './auth.service.js';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    // Global guard: every route requires a valid bearer token unless it is
+    // marked with @Public().
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+  ],
 })
 export class AuthModule {}
